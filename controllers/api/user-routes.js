@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment, Vote } = require('../../models');
 
+
 // get all users
 router.get('/', (req, res) => {
   User.findAll({
@@ -60,16 +61,21 @@ router.post('/', (req, res) => {
     email: req.body.email,
     password: req.body.password
   })
-  .then(dbUserData => {
-    req.session.save(() => {
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
+    .then(dbUserData => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
   
-      res.json(dbUserData);
+        res.json(dbUserData);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
-  })
 });
+
 
 router.post('/login', (req, res) => {
   User.findOne({
@@ -100,7 +106,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id',  (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
   // pass in req.body instead to only update what's passed through
@@ -123,7 +129,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',  (req, res) => {
   User.destroy({
     where: {
       id: req.params.id
