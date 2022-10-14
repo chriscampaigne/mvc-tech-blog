@@ -12,7 +12,7 @@
   
   a {
     text-decoration: none;
-    color: #225ca3;
+    color: darkblue;
     font-weight: bold;
     transition: color .1s;
   }
@@ -75,11 +75,13 @@
   }
   
   header {
-    border-bottom: 1px solid #ccc;
+    border: 1px solid darkblue;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1%;
+    background-color: lightblue;
+    
   }
   
   header h1 {
@@ -97,7 +99,7 @@
     padding: 0;
     cursor: pointer;
     text-decoration: none;
-    color: #225ca3;
+    color: darkblue;
     font-size: 100%;
     font-weight: bold;
     transition: color .1s;
